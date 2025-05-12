@@ -1,14 +1,16 @@
 {
   "dependencies": {
-    "express": "^5.1.0"
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
   },
   "name": "aamecfeedback",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon backend/app.js"
   },
   "author": "",
   "license": "ISC"
