@@ -11,4 +11,8 @@ export default (err,req,res,next)=>{
             error: err
         })
     }
+    res.status(error.statusCode).json({
+        message : error.message,
+        error: err
+    })
 }
