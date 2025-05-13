@@ -1,0 +1,29 @@
+[
+  {
+    "course": "B.TECH",
+    "year": "3",
+    "semester": "6",
+    "section": "B",
+    "department": "IT",
+    "subjectCode": "CS401",
+    "subjectName": "Operating Systems"
+  },
+  {
+    "course": "B.TECH",
+    "year": "3",
+    "semester": "6",
+    "section": "A",
+    "department": "IT",
+    "subjectCode": "CS402",
+    "subjectName": "Database Systems"
+  },
+  {
+    "course": "BSc",
+    "year": "2",
+    "semester": "5",
+    "section": "B",
+    "department": "IT",
+    "subjectCode": "CS403",
+    "subjectName": "Computer Networks"
+  }
+]
