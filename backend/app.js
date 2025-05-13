@@ -3,8 +3,9 @@ import dotenv from 'dotenv'
 import errorMiddleware from "./middleware/errorMiddleware.js"
 import courserouter from  './routers/courserouter.js'
 import studentRouter from './routers/studentRouter.js'
+import connectDatabase from './config/dbConnect.js'
 const app = express()
-
+connectDatabase()
 dotenv.config({path : 'backend/config/config.env'})
 app.use(express.json());
 
