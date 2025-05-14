@@ -10,7 +10,7 @@ const rawData = fs.readFileSync(path.join(__dirname, '../data/data.json'));
 const data = JSON.parse(rawData);
 export const coursecontroller=(req,res)=>{
   const { course, year, semester, section, department } = req.body;
-
+  
   const filtered = data.filter(subject =>
     subject.course === course &&
     subject.year === year &&
