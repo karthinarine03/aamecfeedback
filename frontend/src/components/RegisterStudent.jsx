@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRegisterStudentMutation } from '../redux/api/studentApi'
+import { useNavigate } from 'react-router-dom'
+
 
 const RegisterStudent = () => {
+  const navigate = useNavigate()
 
     const [registerStudent,{data,error,isLoading,isSuccess}] = useRegisterStudentMutation()
 
+    useEffect(()=>{
+      if(isSuccess){
+        navigate(`/submitReview/${data?.data?._id}`)
+      }
+    },[isSuccess])
   function handle(e){
     e.preventDefault()
     const value = {
@@ -16,8 +24,15 @@ const RegisterStudent = () => {
       subjects: [ ]
   }
   registerStudent(value)
+  
+
   }
-    console.log(data,error);
+
+  console.log(data);
+
+ 
+
+    
   return (
     <div>
       <button  onClick={handle}>click</button>

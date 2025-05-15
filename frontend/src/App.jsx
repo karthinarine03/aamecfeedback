@@ -2,6 +2,7 @@
 import './App.css'
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
 import RegisterStudent from './components/RegisterStudent'
+import SubmitReview from './components/SubmitReview'
 function App() {
 
   return(
@@ -11,6 +12,8 @@ function App() {
           <div className='container'>
             <Routes>
               <Route path='/'element={<RegisterStudent/>}/>
+              <Route path='/submitReview/:id'element={<SubmitReview/>}/>
+
             </Routes>
           </div>
         </main>
