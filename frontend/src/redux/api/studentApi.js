@@ -15,9 +15,9 @@ export const studentApi = createApi({
             }
         }),
         addSubjectReview : builder.mutation({
-            query(body){
+            query({id,body}){
                 return {
-                    url :"/updatefeedback/:id",
+                    url :`/updatefeedback/${id}`,
                     method : "PUT",
                     body
                 }
