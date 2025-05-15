@@ -9,16 +9,15 @@ const __dirname = path.dirname(__filename);
 const rawData = fs.readFileSync(path.join(__dirname, '../data/data.json'));
 const data = JSON.parse(rawData);
 export const coursecontroller=(req,res)=>{
-  const { course, year, semester, section, department } = req.body;
-  
+  const { semester } = req.body;
+  console.log(semester);
+  console.log(data);
   const filtered = data.filter(subject =>
-    subject.course === course &&
-    subject.year === year &&
-    subject.semester === semester &&
-    subject.section === section &&
-    subject.department === department
+    subject.semester == semester 
   );
 
-  res.json(filtered.map(({ subjectCode, subjectName }) => ({ subjectCode, subjectName })));
+  res.json({
+    filtered
+  });
   
 }

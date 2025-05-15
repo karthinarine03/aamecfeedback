@@ -1,29 +1,92 @@
 [
   {
-    "course": "B.TECH",
-    "year": "3",
     "semester": "6",
-    "section": "B",
-    "department": "IT",
-    "subjectCode": "CS401",
-    "subjectName": "Operating Systems"
+    "subjects": [
+      {
+        "subjectCode": "CC309",
+        "subjectTitle": "Object Oriented Software Engineering"
+      },
+      {
+        "subjectCode": "CC356",
+        "subjectTitle": "Network Security"
+      },
+      {
+        "subjectCode": "CC354",
+        "subjectTitle": "Soft Computing"
+      },
+      {
+        "subjectCode": "MX3085",
+        "subjectTitle": "Well Being with Traditional Practices"
+      },
+      {
+        "subjectCode": "IT3881",
+        "subjectTitle": "Mobile Application Development"
+      },
+      {
+        "subjectCode": "CCW331",
+        "subjectTitle": "Business Analytics"
+      },
+      {
+        "subjectCode": "CC356L",
+        "subjectTitle": "Network Security Lab (Info Tech Lab)"
+      },
+      {
+        "subjectCode": "CCW331L",
+        "subjectTitle": "Business Analytics Lab (Project Lab)"
+      },
+      {
+        "subjectCode": "CC309L",
+        "subjectTitle": "Object Oriented Software Engineering Lab (Info Tech)"
+      },
+      {
+        "subjectCode": "NAAN MUDHALVAN",
+        "subjectTitle": "Speech Recognition Techniques"
+      }
+    ]
   },
   {
-    "course": "B.TECH",
-    "year": "3",
-    "semester": "6",
-    "section": "A",
-    "department": "IT",
-    "subjectCode": "CS402",
-    "subjectName": "Database Systems"
-  },
-  {
-    "course": "BSc",
-    "year": "2",
-    "semester": "5",
-    "section": "B",
-    "department": "IT",
-    "subjectCode": "CS403",
-    "subjectName": "Computer Networks"
+    "semester": "4",
+    "subjects": [
+      {
+        "subjectCode": "CS452",
+        "subjectTitle": "Theory of Computation"
+      },
+      {
+        "subjectCode": "CS481",
+        "subjectTitle": "Artificial Intelligence and Machine Learning"
+      },
+      {
+        "subjectCode": "CS492",
+        "subjectTitle": "Database Management Systems"
+      },
+      {
+        "subjectCode": "IT401",
+        "subjectTitle": "Web Essentials"
+      },
+      {
+        "subjectCode": "CS451",
+        "subjectTitle": "Introduction to Operating Systems"
+      },
+      {
+        "subjectCode": "CE381",
+        "subjectTitle": "Environmental Sciences and Sustainability"
+      },
+      {
+        "subjectCode": "CS491L",
+        "subjectTitle": "Database Management Systems Laboratory (Venue: Hi Tech Lab)"
+      },
+      {
+        "subjectCode": "IT3401L",
+        "subjectTitle": "Web Essentials Lab (Venue: Info Tech Lab)"
+      },
+      {
+        "subjectCode": "CS3491L",
+        "subjectTitle": "Artificial Intelligence and Machine Learning Lab (Venue: Hi Tech Lab)"
+      },
+      {
+        "subjectCode": "NAAN MUDHALVAN",
+        "subjectTitle": "Web Essentials (Venue: Info Tech Lab)"
+      }
+    ]
   }
 ]

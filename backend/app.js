@@ -15,7 +15,7 @@ app.use(cors())
 //connect db
 connectDatabase()
 
-app.use('/api',courserouter);
+app.use('/api/v1/',courserouter);
 app.use('/api/v1/',studentRouter)
 app.use('/api/v1/',staffRouter)
 
