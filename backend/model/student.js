@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const Students  = new mongoose.Schema({
     reg :{
         type : String,
-        required : true
+        required : true,
+        unique : true
     },
     name : {
         type : String,
@@ -23,7 +24,7 @@ const Students  = new mongoose.Schema({
     subjects : [
         {
             subject : {
-                type : String
+                type : String,
             },
             rating : {
                 type : Number

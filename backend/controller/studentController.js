@@ -6,7 +6,14 @@ import ErrorHandler from "../utils/ErrorHandler.js"
 export const addRating = catchAsynError(async(req,res,next)=>{
     const detail = req.body
 
-    const data = await Student.create(req.body)
+    const data = await Student.find({reg : req.body.reg})
+    if(data.length == 0){
+        const data = await Student.create(req.body)
+
+        return res.status(200).json({
+            data
+        })
+    }
 
     if(!data){
         return next(new ErrorHandler("cannot create",400))
@@ -22,6 +29,13 @@ export const updatesubjects = catchAsynError(async (req, res, next) => {
 
     if(!Array.isArray(req.body.subjects)){
         return next(new ErrorHandler("SUBJECT IS ONLY IN ARRAY",404))
+    }
+
+    const checkData = await Student.find({_id : req.params.id})
+    
+    const isExist = checkData[0]?.subjects?.some(s=> s.subject == subjects[0].subject)
+    if(isExist){
+        return next(new ErrorHandler("already subject rated",400))
     }
 
     const data=await Student.findByIdAndUpdate(
