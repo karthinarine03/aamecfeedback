@@ -48,14 +48,14 @@ export const updatesubjects = catchAsynError(async (req, res, next) => {
     }
     
     // add to Subjects collection
-    const {subject,rating,comment} = subjects[0]
+    const {subject,rating,comment,faculty} = subjects[0]
     const sub = await Subjects.findOne({subject : subject})
 
     if(sub){
         sub.ratings.push({
             student : data._id,
             rating,
-            comment
+            comment,faculty
         })
 
         await sub.save()
@@ -71,7 +71,7 @@ export const updatesubjects = catchAsynError(async (req, res, next) => {
         ratings : [{
             student : data._id,
             rating,
-            comment
+            comment,faculty
         }]
     })
 

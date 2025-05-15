@@ -16,6 +16,9 @@ const Subjects = new mongoose.Schema({
             },
             comment : {
                 type : String
+            },
+            faculty:{
+                type:String
             }
         }
     ]
