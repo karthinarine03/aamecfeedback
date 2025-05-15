@@ -3,6 +3,6 @@ import { getSubjectReview } from "../controller/staffController.js"
 
 const router = express.Router()
 
-router.route('/getSubjectReview/:subject').get(getSubjectReview)
+router.route('/getSubjectReview').get(getSubjectReview)
 
 export default router
