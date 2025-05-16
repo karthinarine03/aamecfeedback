@@ -1,358 +1,48 @@
-*{
-  margin: 0px;
-  padding: 0px;
-}
-.backgrounds{
-  background-image: url(./images/aamec_background.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 170vh;
-}
-.student_page_header{
-  background-color: lightskyblue;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
+header {
+  animation: fadeIn 1s ease-in-out;
 }
 
-.student_page_header img{
-  margin: 20px;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
+
+header:hover {
+  background-color: #f8f9fa; /* light gray on hover */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+header h1,
+header h2,
+header h3 {
+  margin: 0;
+}
+
+header img {
+  transition: transform 0.3s ease;
+}
+
+header img:hover {
+  transform: scale(1.05);
+}
+h1, h2, h3 {
+  margin: 0.3rem 0;
+  line-height: 1.2;
+}
+
+.background{
+    background: url("./images/aamec_background.jpg" ) no-repeat center  ;
+      background-size: cover;
+}
+footer h5 {
+  transition: color 0.3s ease;
+  font-size: 13px;
+}
+
+footer h5:hover {
+  color: #0dcaf0; /* Bootstrap's info color on hover */
+}
 footer{
-  display: flex;
-  height: 150px;
-  background-color: black;
-  color: white;
-}
-footer h1{
-  align-self: center;
-  margin-left: 45%;
-}
-.clg_layout{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-.clg_layout img{
-  margin: 0px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
-}
-.clg_name{
-  margin-top:20px ;
-}
-.clg_name h1,h2,h3{
-  font-family: 'Times New Roman', Times, serif;
-  justify-self: center;
-} 
-.title{
-  margin-left: 35%;
-  padding: 30px;
-  font-size: 24px;
-  font-family:'Times New Roman', Times, serif;
-}
-.home_page{
-  margin-left: 25%;
-  width:50%;
-  height: 100vh;
-  display: block;
-}
-.form_regs h2{
-  justify-self: unset;
-}
-.form_regs{
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-  border: 2px solid black;
-  font-size: 24px;
-  font-weight: bold;
-  background-color: whitesmoke ;
-}
 
-.form_regs input,select{
-    height: 50px;
-    border-radius: 10px;
-    padding-left: 30px;
-    font-size: 20px;
-}
-
-.form_regs button{
-    background-color: lightskyblue;
-    width:200px;
-    height:50px;
-    border-radius: 50px;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.form_regs button:hover{
-  background-color: black;
-  color: white;
-  border: 2px solid lightskyblue;
-}
-
-.sublist{
-  font-size: 18px;
-  padding: 20px;
-  border: 2px solid black;
-  border-radius: 10px;
-  height: 50px;
-  margin-top: 20px;
-  background-color: lightgray;
-  cursor: pointer;
-}
-.rating_board{
-  height: 50px;
-  background-color: lightblue;
-  margin-top: 10px;
-  border-radius: 20px;
-}
-
-.queslist{
-  font-size: 18px;
-  padding: 20px;
-  border: 2px solid black;
-  border-radius: 10px;
-  height: 50px;
-  margin-top: 30px;
-  background-color: lightgray;
-}
-.ratingstar{
-  height: 30px;
-  font-size: 32px;
-  margin: 5px;
-}
-
-.comments{
-  margin-top: 50px;
-  margin-bottom: 30px;
-}
-.comments textarea{
-  height: 90px;
-  width: 90%;
-  padding: 10px;
-  font-size: 20px;
-  resize: none;
-}
-
-/* dashboard css */
-.dashboard_header{
-  display: flex;
-  background-color: lightblue;
-  height: 180px;
-  position: fixed;
-  width: 100%;
-}
-.dashboard_header h1{
-  font-size: 48px;
-  margin-top: 80px;
-  margin-left: 10%;
-}
-.dashboard_header span{
-  color: blue;
-}
-.dashboard_header ul{
-  display: block;
-  margin-left: 25%;
-  margin-top: 100px;
-}
-.dashboard_header ul,li{
-  display: flex;
-}
-
-.dashboard_header li{
-  padding-left: 30px;
-  font-size: 30px;
-}
-
-.dash_list{
-  text-decoration: none;
-  color: black;
-}
-
-.dash_list:hover{
-  color: blue;
-  text-decoration: underline;
-}
-
-.dashboard_main{
-  background-image: url('./images/aamec_logo.webp');
-  background-size:contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 100vh;
-  position: fixed;
-  width: 80%;
-  height: 80%;
-  z-index: -1;
-}
-
-
-/* for mobile */
-@media only screen and (max-width: 768px) {
-  *{
-    margin: 0px;
-    padding: 0px;
-  }
-  .backgrounds{
-    background-image: url(./images/aamec_background.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height:160vh;
-  }
-  header{
-    background-color: lightskyblue;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 10px;
-  }
-  
-  header img{
-    margin: 8px;
-    width: 80px;
-    height: 65px;
-  }
-  
-  footer{
-    display: flex;
-    height: 80px;
-    background-color: black;
-    color: white;
-  }
-  footer h1{
-    align-self: center;
-    margin-left: 40%;
-    font-size: 20px;
-  }
-  .clg_layout{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-  }
-  .clg_layout img{
-    margin: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    width: 85px;
-    height: 70px;
-  }
-  .clg_name{
-    margin-top:20px ;
-  }
-  .clg_name h1,h2,h3{
-    font-family: 'Times New Roman', Times, serif;
-    justify-self: center;
-    font-size: 16px;
-  } 
-  .title{
-    margin-left: 15%;
-    padding: 20px;
-    font-size: 18px;
-    font-family:'Times New Roman', Times, serif;
-  }
-  .home_page{
-    margin-left: 10%;
-    width:80%;
-    height: 100vh;
-    display: block;
-  }
-  .form_regs h2{
-    justify-self: unset;
-  }
-  .form_regs{
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
-    border: 2px solid black;
-    font-size: 24px;
-    font-weight: bold;
-    background-color: whitesmoke ;
-  }
-  
-  .form_regs input,select{
-      height: 50px;
-      border-radius: 10px;
-      padding-left: 30px;
-      font-size: 20px;
-  }
-  
-  .form_regs button{
-      background-color: lightskyblue;
-      width:200px;
-      height:50px;
-      border-radius: 50px;
-      font-size: 20px;
-      font-weight: bold;
-  }
-  
-  .form_regs button:hover{
-    background-color: black;
-    color: white;
-    border: 2px solid lightskyblue;
-  }
-  .subjectList h1{
-    font-size: 25px;
-  }
-  .sublist{
-    font-size: 24px;
-    padding: 20px;
-    border: 2px solid black;
-    border-radius: 10px;
-    height: 30px;
-    margin-top: 20px;
-    background-color: lightgray;
-    cursor: pointer;
-  }
-  .rating_board{
-    position: absolute;
-    left:180px;
-    top: 50px;
-    height: 30px;
-    background-color: lightblue;
-    margin-top: 20px;
-    padding: 5px;
-    border-radius: 20px;
-  }
-  
-  .queslist{
-    position: relative;
-    font-size: 24px;
-    padding: 20px;
-    border: 2px solid black;
-    border-radius: 10px;
-    height: 50px;
-    margin-top: 25px;
-    background-color: lightgray;
-  }
-  .ratingstar{
-    height: 30px;
-    font-size: 26px;
-    margin: 5px;
-  }
-  
-  .comments{
-    margin-top: 50px;
-    margin-bottom: 30px;
-  }
-  .comments textarea{
-    height: 70px;
-    width: 90%;
-    padding: 10px;
-    font-size: 20px;
-    resize: none;
-  }
-  
 }
