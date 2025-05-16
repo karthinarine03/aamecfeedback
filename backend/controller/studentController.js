@@ -6,7 +6,14 @@ import ErrorHandler from "../utils/ErrorHandler.js"
 export const addRating = catchAsynError(async(req,res,next)=>{
     const detail = req.body
 
-    const data = await Student.create(req.body)
+    const data = await Student.find({reg : req.body.reg})
+    if(data.length == 0){
+        const data = await Student.create(req.body)
+
+        return res.status(200).json({
+            data
+        })
+    }
 
     if(!data){
         return next(new ErrorHandler("cannot create",400))
@@ -24,6 +31,13 @@ export const updatesubjects = catchAsynError(async (req, res, next) => {
         return next(new ErrorHandler("SUBJECT IS ONLY IN ARRAY",404))
     }
 
+    const checkData = await Student.find({_id : req.params.id})
+    
+    const isExist = checkData[0]?.subjects?.some(s=> s.subject == subjects[0].subject)
+    if(isExist){
+        return next(new ErrorHandler("already subject rated",400))
+    }
+
     const data=await Student.findByIdAndUpdate(
         {_id:req.params.id},
         {$push:{subjects:{$each:req.body.subjects}}},
@@ -34,14 +48,14 @@ export const updatesubjects = catchAsynError(async (req, res, next) => {
     }
     
     // add to Subjects collection
-    const {subject,rating,comment} = subjects[0]
+    const {subject,rating,comment,faculty} = subjects[0]
     const sub = await Subjects.findOne({subject : subject})
 
     if(sub){
         sub.ratings.push({
             student : data._id,
             rating,
-            comment
+            comment,faculty
         })
 
         await sub.save()
@@ -57,7 +71,7 @@ export const updatesubjects = catchAsynError(async (req, res, next) => {
         ratings : [{
             student : data._id,
             rating,
-            comment
+            comment,faculty
         }]
     })
 
@@ -68,8 +82,8 @@ export const updatesubjects = catchAsynError(async (req, res, next) => {
     })
 });
 
-export const deletestudent=catchAsynError(async(req,res,next)=>{
-    const data=await Student.findByIdAndDelete({_id:req.params.id});
+export const getstudent=catchAsynError(async(req,res,next)=>{
+    const data=await Student.findById({_id:req.params.id});
     if(!data){
         return next(new ErrorHandler("no student",400))
     }
@@ -77,3 +91,4 @@ export const deletestudent=catchAsynError(async(req,res,next)=>{
         data
     })
 })
+
