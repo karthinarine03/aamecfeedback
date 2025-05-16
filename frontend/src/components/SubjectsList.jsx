@@ -18,7 +18,7 @@ const SubjectsList = () => {
 
   useEffect(() => {
     if (semester) {
-      getSubjects({ semester });
+      getSubjects({ semester,section});
     }
   }, [semester]);
 

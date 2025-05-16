@@ -1,111 +1,266 @@
 [
   {
-    "semester": "4",
-"subjects": [
+    "semester": "6",
+    "sections": [
       {
-        "subjectCode": "CS356",
-        "subjectTitle": "Object Oriented Software Engineering",
-        "faculty": "Mrs. Gleyasri"
-      },
-      {
-        "subjectCode": "CS354",
-        "subjectTitle": "Network Security",
-        "faculty": "Dr. Mohan"
-      },
-      {
-        "subjectCode": "CS353",
-        "subjectTitle": "Soft Computing",
-        "faculty": "Mr. B. Venkatesh"
-      },
-      {
-        "subjectCode": "MX3085",
-        "subjectTitle": "Well Being with Traditional Practices",
-        "faculty": "Mrs. S. Ponmarasi"
-      },
-      {
-        "subjectCode": "IT3881",
-        "subjectTitle": "Mobile Applications Development Lab (Hi-Tech Lab)",
-        "faculty": "Mr. Mohamed Hairs"
-      },
-      {
-        "subjectCode": "CS355L",
-        "subjectTitle": "Object Oriented Software Engineering Lab (Info Tech)",
-        "faculty": "Mrs. Gleyasri (C), Mrs. Ponmarasi (S)"
-      },
-      {
-        "subjectCode": "CS354L",
-        "subjectTitle": "Network Security Lab (Info Tech Lab)",
-        "faculty": "Mr. B. Venkatesh (C), Dr. V. Kalaivazhi (S)"
-      },
-      {
-        "subjectCode": "CCW331L",
-        "subjectTitle": "Business Analytics Lab (Project Lab)",
-        "faculty": "Dr. V. Kalaivazhi (C), Mrs. J. Sathiyajothi (S)"
-      },
-      {
-        "subjectCode": "CCW331",
-        "subjectTitle": "Business Analytics",
-        "faculty": "Mrs. S. Ponmarasi"
-      },
-      {
-        "subjectCode": "NAAN MUDHALVAN",
-        "subjectTitle": "Speech Recognition Techniques",
-        "faculty": "Mrs. M.C. Jayaprasanna, Dr. K. Mohan"
+        "section": "A",
+        "subjects": [
+          {
+            "subjectCode": "CCS356",
+            "subjectTitle": "Object Oriented Software Engineering",
+            "faculty": "Mrs.G.Jeyasri"
+          },
+          {
+            "subjectCode": "CCS335",
+            "subjectTitle": "Cloud Computing",
+            "faculty": "Dr.K.Mohan"
+          }, {
+            "subjectCode": "CCS335L",
+            "subjectTitle": "Cloud Computing Lab(HITECH LAB)",
+            "faculty": "Mr.R.Rama Rajesh(I/C),Mr. B. Venkatesh (C/S)"
+          },
+          {
+            "subjectCode": "CCS354",
+            "subjectTitle": "Network Security",
+            "faculty": "Mr. B. Venkatesh"
+          },
+          {
+            "subjectCode": "CCS364",
+            "subjectTitle": "Soft Computing",
+            "faculty": "Dr. V. Kalaivazhi"
+          },
+          {
+            "subjectCode": "MX3085",
+            "subjectTitle": "Well Being with Traditional Practices",
+            "faculty": "Mr. Mohamed Haris"
+          },
+          {
+            "subjectCode": "IT3681",
+            "subjectTitle": "Mobile Applications Development Lab (Hi-Tech Lab)",
+            "faculty": "Dr.R.Rebekha"
+          },
+          {
+            "subjectCode": "CS356L",
+            "subjectTitle": "Object Oriented Software Engineering Lab (Info Tech)",
+            "faculty": "Mrs.G.Jeyasri(I/C), Mrs. Ponmarasi (C/S)"
+          },
+          {
+            "subjectCode": "CS354L",
+            "subjectTitle": "Network Security Lab (Info Tech Lab)",
+            "faculty": "Mr. B. Venkatesh (C), Dr. V. Kalaivazhi (S)"
+          },
+            {
+            "subjectCode": "CCS364L",
+            "subjectTitle": "Soft Computing  Lab (Project Lab)",
+            "faculty": "Dr. V. Kalaivazhi, Mrs.Sathiya Jothi(C/S)"
+          },
+          {
+            "subjectCode": "CCW331L",
+            "subjectTitle": "Business Analytics Lab (Project Lab)",
+            "faculty": "Mrs. S. Ponnarasi(I/C),Mrs.G.Jeyasri(C/S)"
+          },
+          {
+            "subjectCode": "CCW331",
+            "subjectTitle": "Business Analytics",
+            "faculty": "Mrs. S. Ponnarasi"
+          },
+          {
+            "subjectCode": "NAAN MUDHALVAN",
+            "subjectTitle": "Speech Recognition Techniques",
+            "faculty": "Mrs. M.C. Jayaprasanna, Dr. K. Mohan"
+          }
+        ]
+        
+      },  {
+        "section": "B",
+           "subjects": [
+          {
+            "subjectCode": "CCS356",
+            "subjectTitle": "Object Oriented Software Engineering",
+            "faculty": "Mrs.G.Jeyasri"
+          },
+          {
+            "subjectCode": "CCS335",
+            "subjectTitle": "Cloud Computing",
+            "faculty": "Mr.R.Rama Rajesh"
+          }, 
+          {
+            "subjectCode": "CCS335L",
+            "subjectTitle": "Cloud Computing Lab(HITECH LAB)",
+            "faculty": "Mr.R.Rama Rajesh(I/C),Mr. B. Venkatesh (C/S)"
+          },
+          {
+            "subjectCode": "CCS354",
+            "subjectTitle": "Network Security",
+            "faculty": "Mr. B. Venkatesh"
+          },
+          {
+            "subjectCode": "CCS364",
+            "subjectTitle": "Soft Computing",
+            "faculty": "Dr. V. Kalaivazhi"
+          },
+          {
+            "subjectCode": "MX3085",
+            "subjectTitle": "Well Being with Traditional Practices",
+            "faculty": "Mrs.N.Mohamed Haris"
+          },
+          {
+            "subjectCode": "IT3681",
+            "subjectTitle": "Mobile Applications Development Lab (Hi-Tech Lab)",
+            "faculty": "Dr.R.Rebekha,Mrs.R.Priya(C/S)"
+          },
+          {
+            "subjectCode": "CS356L",
+            "subjectTitle": "Object Oriented Software Engineering Lab (Info Tech)",
+            "faculty": "Mrs.G.Jeyasri(I/C),Mrs.R.Priya(C/S)"
+          },
+          {
+            "subjectCode": "CS354L",
+            "subjectTitle": "Network Security Lab (Info Tech Lab)",
+            "faculty": "Mr. B. Venkatesh (C),Mr.R.Rama Rajesh(C/S)"
+          },
+            {
+            "subjectCode": "CCS364L",
+            "subjectTitle": "Soft Computing  Lab (Project Lab)",
+            "faculty": "Dr. V. Kalaivazhi,Mrs. S. Ponnarasi(C/S)"
+          },
+          {
+            "subjectCode": "CCW331L",
+            "subjectTitle": "Business Analytics Lab (Project Lab)",
+            "faculty": "Mrs.N.Mohamed Haris(I/C),Mrs.G.Jeyasri(C/S)"
+          },
+          {
+            "subjectCode": "CCW331",
+            "subjectTitle": "Business Analytics",
+            "faculty": "Mrs.N.Mohamed Haris"
+          },
+          {
+            "subjectCode": "NAAN MUDHALVAN",
+            "subjectTitle": "Speech Recognition Techniques",
+            "faculty": "Mrs.N.Mohamed Haris"
+          }
+        ]
+        
       }
+
     ]
   },
   {
-    "semester": "6",
-     "subjects": [
+    "semester": "4",
+    "sections": [
       {
-        "subjectCode": "CS3491",
-        "subjectTitle": "Artificial Intelligence and Machine Learning",
-        "faculty": "Mrs. S. Sudha"
-      },
-      {
-        "subjectCode": "CS3491L",
-        "subjectTitle": "Artificial Intelligence and Machine Learning Lab",
-        "faculty": "Mrs. S. Sudha"
-      },
-      {
-        "subjectCode": "CS3492",
-        "subjectTitle": "Theory of Computation",
-        "faculty": "Mrs. R. Priya"
-      },
-      {
-        "subjectCode": "CS3493",
-        "subjectTitle": "Database Management Systems",
-        "faculty": "Mrs. J. SathiyaJothi"
-      },
-      {
-        "subjectCode": "CS3493L",
-        "subjectTitle": "Database Management Systems Lab",
-        "faculty": "Mrs. J. SathiyaJothi"
-      },
-      {
-        "subjectCode": "CS3494",
-        "subjectTitle": "Web Essentials",
-        "faculty": "Mrs. V. Sivasakthi"
-      },
-      {
-        "subjectCode": "CS3494L",
-        "subjectTitle": "Web Essentials Lab",
-        "faculty": "Mrs. V. Sivasakthi"
-      },
-      {
-        "subjectCode": "CS3451",
-        "subjectTitle": "Operating Systems",
-        "faculty": "Dr. D. Deepa"
-      },
-      {
-        "subjectCode": "EN3451",
-        "subjectTitle": "Environmental Sciences and Sustainability",
-        "faculty": "Dr. M.C. Jayaprasanna"
-      },
-      {
-        "subjectCode": "Naan Mudhalvan",
-        "subjectTitle": "Web Essentials",
-        "faculty": "Mrs. J. SathiyaJothi"
+        "section": "A",
+        "subjects": [
+          {
+            "subjectCode": "CS3491",
+            "subjectTitle": "Artificial Intelligence and Machine Learning",
+            "faculty": "Mrs. S. Sudha"
+          },
+          {
+            "subjectCode": "CS3491L",
+            "subjectTitle": "Artificial Intelligence and Machine Learning Lab",
+            "faculty": "Mrs. S. Sudha"
+          },
+          {
+            "subjectCode": "CS3452",
+            "subjectTitle": "Theory of Computation",
+            "faculty": "Mrs. R. Priya"
+          },
+          {
+            "subjectCode": "CS3493",
+            "subjectTitle": "Database Management Systems",
+            "faculty": "Mrs. J. SathiyaJothi"
+          },
+          {
+            "subjectCode": "CS3493L",
+            "subjectTitle": "Database Management Systems Lab",
+            "faculty": "Mrs. J. SathiyaJothi"
+          },
+          {
+            "subjectCode": "CS3494",
+            "subjectTitle": "Web Essentials",
+            "faculty": "Mrs. V. Sivasakthi"
+          },
+          {
+            "subjectCode": "CS3494L",
+            "subjectTitle": "Web Essentials Lab",
+            "faculty": "Mrs. V. Sivasakthi"
+          },
+           {
+            "subjectCode": "CS3451",
+            "subjectTitle": "introduction of Operating Systems",
+            "faculty": "Dr.R.Rebekha"
+          },
+           {
+            "subjectCode": "CS3461",
+            "subjectTitle": "Operating Systems ",
+            "faculty": "Dr.R.Rebekha"
+          },
+          {
+            "subjectCode": "GE3451",
+            "subjectTitle": "Environmental Sciences and Sustainability",
+            "faculty": "Dr. D. Deepa"
+          },
+          {
+            "subjectCode": "Naan Mudhalvan",
+            "subjectTitle": "Web Essentials",
+            "faculty": "Mr.R.Rama Rajesh"
+          }
+        ]
+      }, {
+        "section": "b",
+        "subjects": [
+          {
+            "subjectCode": "CS3491",
+            "subjectTitle": "Artificial Intelligence and Machine Learning",
+            "faculty": "Mrs. S. Sudha"
+          },
+          {
+            "subjectCode": "CS3491L",
+            "subjectTitle": "Artificial Intelligence and Machine Learning Lab",
+            "faculty": "Mrs. S. Sudha"
+          },
+          {
+            "subjectCode": "CS3492",
+            "subjectTitle": "Theory of Computation",
+            "faculty": "Mrs. R. Priya"
+          },
+          {
+            "subjectCode": "CS3493",
+            "subjectTitle": "Database Management Systems",
+            "faculty": "Mrs. J. SathiyaJothi"
+          },
+          {
+            "subjectCode": "CS3493L",
+            "subjectTitle": "Database Management Systems Lab",
+            "faculty": "Mrs. J. SathiyaJothi"
+          },
+          {
+            "subjectCode": "CS3494",
+            "subjectTitle": "Web Essentials",
+            "faculty": "Mrs. V. Sivasakthi"
+          },
+          {
+            "subjectCode": "CS3494L",
+            "subjectTitle": "Web Essentials Lab",
+            "faculty": "Mrs. V. Sivasakthi"
+          },
+          {
+            "subjectCode": "CS3451",
+            "subjectTitle": "Operating Systems",
+            "faculty": "Dr. M.C. Jayaprasanna"
+          },
+          {
+            "subjectCode": "EN3451",
+            "subjectTitle": "Environmental Sciences and Sustainability",
+            "faculty": "Dr. D. Deepa"
+          },
+          {
+            "subjectCode": "Naan Mudhalvan",
+            "subjectTitle": "Web Essentials",
+            "faculty": "Mrs. J. SathiyaJothi"
+          }
+        ]
       }
     ]
   }
