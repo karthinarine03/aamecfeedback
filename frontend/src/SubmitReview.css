@@ -1,0 +1,24 @@
+.text-gradient {
+  background: linear-gradient(90deg, #007bff, #6610f2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+}
+
+.question-card {
+  background: #ffffff;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.question-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+textarea.form-control {
+  border-radius: 10px;
+  font-size: 1rem;
+}
