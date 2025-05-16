@@ -14,9 +14,8 @@ function App() {
       <div>
         <Toaster/>
         <main>
-        <div className='backgrounds'>
-        <div className='home_page'>
-        <div className='form_regs'>
+        <div className='container '>
+          <div className=''>
             <Routes>
               <Route path='/'element={<RegisterStudent/>}/>
               <Route path='/submitReview/:id'element={<SubmitReview/>}/>
@@ -26,7 +25,7 @@ function App() {
             </Routes>
           </div>
         </div>
-        </div>
+
         </main>
       </div>
     </Router>

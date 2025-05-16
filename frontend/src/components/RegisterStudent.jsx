@@ -67,11 +67,13 @@ const RegisterStudent = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-          <p>STUDENT NAME</p><br/>
+        <div className=''>
+          <div className='d-flex flex-column align-items-center '>
+                <p>STUDENT NAME</p>
                 <input type='text' id='name' value={name} onChange={(e)=>{setName(e.target.value)}} placeholder='Enter The Name'></input><br></br>
-                <p>REGISTER NUMBER</p><br/>
+                <p>REGISTER NUMBER</p>
                 <input type='text' id='reg_no' value={register} onChange={(e)=>{setRegister(e.target.value)}} placeholder='Enter The Name'></input><br></br>
-                <p>DEPARTMENT</p><br/>
+                <p>DEPARTMENT</p>
                 <select id='dept' onChange={(e)=>{setDept(e.target.value)}}>
                     <option hidden>--</option>
                     <option>CSE</option>
@@ -81,22 +83,22 @@ const RegisterStudent = () => {
                     <option>MECH</option>
                     <option>CIVIL</option>
                     <option>CHEMICAL</option>
-                </select><br></br>
-                <p>YEAR</p><br/>
+                </select>
+                <p>YEAR</p>
                 <select id='year' onChange={(e)=>{setYear(e.target.value)}}>
                     <option hidden>--</option>
                     <option value='1'>I</option>
                     <option value='2'>II</option>
                     <option value='3'>III</option>
                     <option value='4'>IV</option>
-                </select><br></br>
-                <p>SECTION</p><br/>
+                </select>
+                <p>SECTION</p>
                 <select id='sec' onChange={(e)=>{setSection(e.target.value)}}>
                     <option hidden>--</option>
                     <option value='A'>A SECTION</option>
                     <option value='B'>B SECTION</option>
-                </select><br></br>
-                <p>SEMESTER</p><br/>
+                </select>
+                <p>SEMESTER</p>
                 <select id='sem' onChange={(e)=>{setSemester(e.target.value)}}>
                     <option hidden>--</option>
                     <option value='1'>I</option>
@@ -107,10 +109,12 @@ const RegisterStudent = () => {
                     <option value='6'>VI</option>
                     <option value='7'>VII</option>
                     <option value='8'>VIII</option>
-                </select><br></br>
+                </select>
                 <center>
                 <button type='submit'>submit</button>
                 </center>
+          </div>
+        </div>
       </form>
     </div>
   )
