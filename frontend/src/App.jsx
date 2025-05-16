@@ -15,7 +15,7 @@ function App() {
         <Toaster/>
         <main>
         <div className='container '>
-          <div className=''>
+          <div className='row'>
             <Routes>
               <Route path='/'element={<RegisterStudent/>}/>
               <Route path='/submitReview/:id'element={<SubmitReview/>}/>
