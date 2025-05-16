@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import { useGetSubjectsMutation } from "../redux/api/courseApi";
 import { useRegisterStudentMutation } from "../redux/api/studentApi";
+import "../SubjectsList.css";
 
 const SubjectsList = () => {
   const [searchParams] = useSearchParams();
@@ -12,13 +13,8 @@ const SubjectsList = () => {
   const section = searchParams.get("sec");
   const id = params.id;
 
-  const [registerStudent, { registerdata, error, isLoading, isSuccess }] =
-    useRegisterStudentMutation();
-
-  const [
-    getSubjects,
-    { data: subjectData, error: subjectError, isSuccess: subjectSuccess },
-  ] = useGetSubjectsMutation();
+  const [registerStudent] = useRegisterStudentMutation();
+  const [getSubjects, { data: subjectData }] = useGetSubjectsMutation();
 
   useEffect(() => {
     if (semester) {
@@ -29,15 +25,15 @@ const SubjectsList = () => {
   const subjects = subjectData?.filtered?.[0]?.subjects;
 
   return (
-    <div>
-      <div className="subjectList">
-        <h1>SUBJECTS</h1>
-        <div className="subjectcards">
-          {subjects ? (
-            subjects.map((subject, index) => (
+    <div className="container py-5">
+      <h1 className="text-center text-gradient mb-5">Subjects</h1>
+
+      <div className="row g-4">
+        {subjects ? (
+          subjects.map((subject, index) => (
+            <div className="col-12 col-sm-6 col-lg-4 d-flex" key={index}>
               <div
-                className="sublist"
-                key={index}
+                className="card subject-card w-100"
                 onClick={() =>
                   navigate(
                     `/submitReview/${id}?sub=${encodeURIComponent(
@@ -48,15 +44,21 @@ const SubjectsList = () => {
                   )
                 }
               >
-                <h2>
-                  {subject.subjectCode} - {subject.subjectTitle}
-                </h2>
+                <div className="card-body text-center d-flex flex-column justify-content-center">
+                  <h5 className="card-title fw-bold">
+                    {subject.subjectCode} - {subject.subjectTitle}
+                  </h5>
+                  <p className="text-muted mb-0">{subject.faculty}</p>
+                </div>
               </div>
-            ))
-          ) : (
+            </div>
+          ))
+        ) : (
+          <div className="text-center w-100">
+            <div className="spinner-border text-primary" role="status" />
             <p>Loading...</p>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
