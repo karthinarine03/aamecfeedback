@@ -22,8 +22,14 @@ export const studentApi = createApi({
                     body
                 }
             }
+        }),
+        getStudents: builder.query({
+            query: (id) => ({
+            url: `/getStudent/${id}`,
+            method: 'GET'
+        })
         })
     })
 })
 
-export const {useRegisterStudentMutation, useAddSubjectReviewMutation} = studentApi
+export const {useRegisterStudentMutation, useAddSubjectReviewMutation,useGetStudentsQuery} = studentApi

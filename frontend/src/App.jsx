@@ -1,5 +1,4 @@
-
-import './App.css'
+import "./App.css"
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
 import RegisterStudent from './components/RegisterStudent'
 import SubmitReview from './components/SubmitReview'
@@ -7,14 +6,18 @@ import { Toaster, toast } from 'react-hot-toast'
 import SubjectsList from './components/SubjectsList'
 
 import Onestaffreview from './components/Onestaffreview'
+import Header from './layout/Header'
+import Footer from './layout/Footer'
 function App() {
 
   return(
     <Router>
       <div>
+        <Header/>
         <Toaster/>
+
         <main>
-        <div className='container '>
+        <div className='container background'>
           <div className='row'>
             <Routes>
               <Route path='/'element={<RegisterStudent/>}/>
@@ -27,6 +30,7 @@ function App() {
         </div>
 
         </main>
+        <Footer/>
       </div>
     </Router>
   )

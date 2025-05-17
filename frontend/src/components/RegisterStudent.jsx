@@ -16,10 +16,10 @@ const RegisterStudent = () => {
     const [registerStudent,{data,error,isLoading,isSuccess}] = useRegisterStudentMutation()
 
     useEffect(()=>{
-      if(isSuccess){
+      if(isSuccess && data?.data[0]?._id){
         navigate(`/subjectList/${data?.data[0]?._id}?sem=${semester}&sec=${section}`)
       }
-    },[isSuccess])
+    },[isSuccess,data?.data[0]?._id])
 
     //check is empty
 

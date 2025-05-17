@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import { useGetSubjectsMutation } from "../redux/api/courseApi";
-import { useRegisterStudentMutation } from "../redux/api/studentApi";
+import { useGetStudentsQuery, useRegisterStudentMutation } from "../redux/api/studentApi";
 import "../SubjectsList.css";
 
 const SubjectsList = () => {
@@ -13,9 +13,10 @@ const SubjectsList = () => {
   const section = searchParams.get("sec");
   const id = params.id;
 
-  const [registerStudent] = useRegisterStudentMutation();
+  const {data,error,isLoading,isSuccess} = useGetStudentsQuery(id)
   const [getSubjects, { data: subjectData }] = useGetSubjectsMutation();
 
+  console.log(data);
   useEffect(() => {
     if (semester) {
       getSubjects({ semester,section});
@@ -23,7 +24,7 @@ const SubjectsList = () => {
   }, [semester]);
 
   const subjects = subjectData?.filtered?.[0]?.subjects;
-
+  console.log(subjectData);
   return (
     <div className="container py-5">
       <h1 className="text-center text-gradient mb-5">Subjects</h1>

@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useGetAllSubjectsReviewQuery } from '../redux/api/staffApi';
+import { DownloadTableExcel } from 'react-export-table-to-excel';
+
 
 const Onestaffreview = () => {
   const { data, error, isLoading } = useGetAllSubjectsReviewQuery();
+  const tableRef = useRef(null)
 
   if (isLoading) return <p className="text-center my-4">Loading subject reviews...</p>;
   if (error) return <p className="text-center text-danger my-4">Error loading reviews.</p>;
@@ -10,10 +13,17 @@ const Onestaffreview = () => {
   return (
     <div className="container py-4">
       <h2 className="mb-4 text-primary text-center fw-bold">All Subject Reviews</h2>
+      <DownloadTableExcel
+        filename='TotalStaff_details'
+        sheet='TotalStaff'
+        currentTableRef={tableRef}
+      >
+        <button>Export excel</button>
+      </DownloadTableExcel>
       
       {/* Table view for medium and larger screens */}
       <div className="table-responsive shadow rounded d-none d-md-block">
-        <table className="table table-bordered table-hover align-middle mb-0">
+        <table className="table table-bordered table-hover align-middle mb-0" ref={tableRef}>
           <thead className="table-dark">
             <tr>
               <th>Subject</th>

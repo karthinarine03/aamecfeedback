@@ -12,6 +12,7 @@ export const coursecontroller = (req, res) => {
   const { semester, section } = req.body; // <-- Add section from request
   console.log("Semester:", semester);
   console.log("Section:", section);
+  console.log(data);
 
   const filtered = data
     .filter(entry => entry.semester == semester)

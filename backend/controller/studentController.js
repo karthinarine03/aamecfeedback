@@ -82,8 +82,8 @@ export const updatesubjects = catchAsynError(async (req, res, next) => {
     })
 });
 
-export const deletestudent=catchAsynError(async(req,res,next)=>{
-    const data=await Student.findByIdAndDelete({_id:req.params.id});
+export const getStudent=catchAsynError(async(req,res,next)=>{
+    const data=await Student.findById({_id:req.params.id});
     if(!data){
         return next(new ErrorHandler("no student",400))
     }
