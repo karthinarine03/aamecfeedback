@@ -6,13 +6,8 @@ export const getSubjectReview = catchAsynError(async (req, res, next) => {
   const { section, subject } = req.body;
 
   const data = await Subjects.aggregate([
-    // 1️⃣ Match by subject if provided
     ...(subject ? [{ $match: { subject: { $in: subject } } }] : []),
-
-    // 2️⃣ Unwind ratings array
     { $unwind: "$ratings" },
-
-    // 3️⃣ Join with student collection
     {
       $lookup: {
         from: "students",
@@ -21,57 +16,52 @@ export const getSubjectReview = catchAsynError(async (req, res, next) => {
         as: "student"
       }
     },
-
-    // 4️⃣ Flatten the joined student array
     { $unwind: "$student" },
-
-    // 5️⃣ Match section if provided
     ...(section ? [{ $match: { "student.section": section } }] : []),
 
-    // 6️⃣ Group back ratings with faculty included
+    // Group by subject and faculty
     {
       $group: {
-        _id: "$_id",
+        _id: { subjectId: "$_id", faculty: "$ratings.faculty" },
         subject: { $first: "$subject" },
+        faculty: { $first: "$ratings.faculty" },
         ratings: {
           $push: {
             rating: "$ratings.rating",
             comment: "$ratings.comment",
-            faculty: "$ratings.faculty", // ✅ Add this line
             student: {
               _id: "$student._id",
               section: "$student.section"
             }
           }
-        }
+        },
+        avgRating: { $avg: "$ratings.rating" }
       }
     },
-
-    // 7️⃣ Add average rating
     {
-      $addFields: {
-        avgRating: {
-          $round: [{ $avg: "$ratings.rating" }, 0]
+      $group: {
+        _id: "$_id.subjectId",
+        subject: { $first: "$subject" },
+        facultyRatings: {
+          $push: {
+            faculty: "$faculty",
+            avgRating: { $round: ["$avgRating", 1] },
+            ratings: "$ratings"
+          }
         }
       }
     }
   ]);
 
-  if (data.length === 0) {
+  if (!data.length) {
     return next(new ErrorHandler("Not found subject or section", 400));
   }
 
-  res.status(200).json({
-    data
-  });
+  res.status(200).json({ data });
 });
-
 export const allSubjectReview = catchAsynError(async (req, res, next) => {
   const data = await Subjects.aggregate([
-    // 1️⃣ Unwind the ratings array
     { $unwind: "$ratings" },
-
-    // 2️⃣ Join student details
     {
       $lookup: {
         from: "students",
@@ -80,11 +70,7 @@ export const allSubjectReview = catchAsynError(async (req, res, next) => {
         as: "student"
       }
     },
-
-    // 3️⃣ Unwind joined student array
     { $unwind: "$student" },
-
-    // 4️⃣ Group all reviews by subject
     {
       $group: {
         _id: "$_id",
@@ -102,8 +88,6 @@ export const allSubjectReview = catchAsynError(async (req, res, next) => {
         }
       }
     },
-
-    // 5️⃣ Add average rating
     {
       $addFields: {
         avgRating: {
