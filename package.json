@@ -17,8 +17,13 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon backend/app.js"
+"start:backend":  "cd backend && npm start",
+    "start:frontend": "cd frontend && npm run dev",
+    "start":          "concurrently \"npm run start:backend\" \"npm run start:frontend\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
 }
