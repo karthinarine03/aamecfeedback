@@ -16,7 +16,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon backend/app.js"
+ "start": "node backend/app.js",          
+    "dev": "nodemon backend/app.js" 
   },
   "author": "",
   "license": "ISC"
