@@ -16,7 +16,13 @@ const SubjectsList = () => {
   const {data,error,isLoading,isSuccess} = useGetStudentsQuery(id)
   const [getSubjects, { data: subjectData }] = useGetSubjectsMutation();
 
-  console.log(data);
+  let selectedSubject = []
+
+  data?.data?.subjects?.forEach(e=>{
+      selectedSubject.push(e?.subject)
+  });
+
+  console.log(selectedSubject);
   useEffect(() => {
     if (semester) {
       getSubjects({ semester,section});
@@ -25,6 +31,9 @@ const SubjectsList = () => {
 
   const subjects = subjectData?.filtered?.[0]?.subjects;
   console.log(subjectData);
+
+  console.log(subjects?.[0]?.subjectTitle.includes(selectedSubject));
+
   return (
     <div className="container py-5">
       <h1 className="text-center text-gradient mb-5">Subjects</h1>

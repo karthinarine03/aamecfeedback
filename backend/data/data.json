@@ -1,6 +1,6 @@
 [
   {
-    "semester": "6",
+    "semester": 6,
     "sections": [
       {
         "section": "A",
@@ -146,7 +146,7 @@
     ]
   },
   {
-    "semester": "4",
+    "semester": 4,
     "sections": [
       {
         "section": "A",
