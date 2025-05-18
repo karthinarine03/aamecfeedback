@@ -36,7 +36,7 @@ const Onestaffreview = () => {
       const facultyRatings = Object.values(facultyMap).map(fac => {
         const avg = fac.ratings.reduce((sum, r) => sum + r.rating, 0) / fac.ratings.length;
         const avgRating = parseFloat(avg.toFixed(1));
-        const avgPercentage = Math.round((avgRating / 5) * 10);
+        const avgPercentage = Math.round((avgRating / 5) * 10); // percentage from rating out of 5
         return {
           ...fac,
           avgRating,
@@ -78,7 +78,8 @@ const Onestaffreview = () => {
                 <td className="text-start px-4">{fac.faculty}</td>
                 <td className="text-center">
                   <span className="badge bg-success fs-6 me-2">{fac.avgPercentage}%</span>
-                  <small>({fac.avgRating})</small>
+                  <i className="bi bi-star-fill me-1 text-warning"></i>
+                  <small>{fac.avgRating}</small>
                 </td>
               </tr>
             ));
@@ -110,8 +111,10 @@ const Onestaffreview = () => {
             <div key={index} className="mb-3">
               <p className="mb-1">Subject: <strong>{item.subject}</strong></p>
               <p className="mb-1">Faculty: {item.faculty}</p>
-              <p>
-                Avg Rating: <span className="badge bg-success">{item.avgRating}</span> ({item.avgPercentage})
+              <p className="mb-0">
+                <span className="badge bg-success">{item.avgPercentage}%</span>{' '}
+                <i className="bi bi-star-fill me-1 text-warning"></i>
+                <span>{item.avgRating}</span>
               </p>
               <hr />
             </div>
@@ -141,13 +144,13 @@ const Onestaffreview = () => {
         </select>
       </div>
 
-      {/* Table View (Desktop) */}
+      {/* Desktop Table View */}
       <div className="d-none d-md-block">
         {renderTableBySection('A')}
         {renderTableBySection('B')}
       </div>
 
-      {/* Card View (Mobile) */}
+      {/* Mobile Card View */}
       <div className="d-md-none">
         {renderMobileCardsBySection('A')}
         {renderMobileCardsBySection('B')}

@@ -1,24 +1,129 @@
+/* === General Layout === */ 
+body {
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* === Gradient Header === */
 .text-gradient {
   background: linear-gradient(90deg, #007bff, #6610f2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 2.75rem;
   text-transform: uppercase;
-  font-size: 2.5rem;
+  letter-spacing: 1px;
 }
 
-.question-card {
-  background: #ffffff;
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* === Subject Card === */
+.subject-card {
+  border: none;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;          /* Changed for mobile flexibility */
+  min-height: 220px;     /* Maintain min height */
+  padding: 1rem 1.5rem;  /* Slight padding adjustment */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
-.question-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+.subject-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 25px 35px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(135deg, #e6f0ff, #ffffff);
 }
 
-textarea.form-control {
-  border-radius: 10px;
+/* === Card Text === */
+.subject-card h5 {
+  font-size: 1.35rem;
+  color: #343a40;
+  font-weight: 600;
+}
+
+.subject-card p {
+  color: #6c757d;
   font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* === Spinner Centered === */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  margin-top: 2rem;
+}
+
+/* === Already Reviewed Card === */
+.subject-card.disabled-card {
+  background: linear-gradient(135deg, #ffffff, #eaeaea);
+  color: #343a40;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* === Tick Badge with Sky Blue === */
+.tick-animate {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #0ea5e9; /* sky blue text */
+  background-color: #e0f2fe; /* light sky blue background */
+  border-radius: 1rem;
+  padding: 0.4rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.tick-icon {
+  font-size: 1.2rem;
+  color: #0ea5e9; /* sky blue icon */
+}
+
+/* === Click Animation === */
+.tick-bounce {
+  animation: bounceTick 0.6s ease-in-out;
+}
+
+@keyframes bounceTick {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.2);
+  }
+  40% {
+    transform: scale(0.95);
+  }
+  60% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* === Responsive adjustments for Mobile === */
+@media (max-width: 576px) {
+  .subject-card h5 {
+    font-size: 1.1rem;
+  }
+  .subject-card p {
+    font-size: 0.9rem;
+  }
+  .tick-animate {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+  }
 }
