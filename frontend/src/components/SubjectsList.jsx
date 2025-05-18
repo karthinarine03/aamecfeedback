@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import { useGetSubjectsMutation } from "../redux/api/courseApi";
-import { useGetStudentsQuery, useRegisterStudentMutation } from "../redux/api/studentApi";
+import { useGetStudentsQuery } from "../redux/api/studentApi";
 import "../SubjectsList.css";
 
 const SubjectsList = () => {
@@ -13,34 +13,37 @@ const SubjectsList = () => {
   const section = searchParams.get("sec");
   const id = params.id;
 
-  const {data,error,isLoading,isSuccess} = useGetStudentsQuery(id)
-  const [getSubjects, { data: subjectData }] = useGetSubjectsMutation();
+  const { data: studentData, isLoading: studentLoading } = useGetStudentsQuery(id);
+  const [getSubjects, { data: subjectData, isLoading: subjectLoading }] = useGetSubjectsMutation();
 
-  let selectedSubject = []
 
-  data?.data?.subjects?.forEach(e=>{
-      selectedSubject.push(e?.subject)
-  });
-
-  console.log(selectedSubject);
   useEffect(() => {
-    if (semester) {
-      getSubjects({ semester,section});
+    if (semester && section) {
+      getSubjects({ semester, section });
     }
-  }, [semester]);
+  }, [semester, section, getSubjects]);
 
-  const subjects = subjectData?.filtered?.[0]?.subjects;
-  console.log(subjectData);
+  const selectedSubjectTitles = studentData?.data?.subjects?.map((s) => s?.subject) || [];
 
-  console.log(subjects?.[0]?.subjectTitle.includes(selectedSubject));
+  const allSubjects = subjectData?.filtered?.[0]?.subjects || [];
+
+
+  const filteredSubjects = allSubjects.filter(
+    (subj) => !selectedSubjectTitles.includes(subj.subjectTitle)
+  );
 
   return (
     <div className="container py-5">
       <h1 className="text-center text-gradient mb-5">Subjects</h1>
 
       <div className="row g-4">
-        {subjects ? (
-          subjects.map((subject, index) => (
+        {studentLoading || subjectLoading ? (
+          <div className="text-center w-100">
+            <div className="spinner-border text-primary" role="status" />
+            <p>Loading...</p>
+          </div>
+        ) : filteredSubjects.length > 0 ? (
+          filteredSubjects.map((subject, index) => (
             <div className="col-12 col-sm-6 col-lg-4 d-flex" key={index}>
               <div
                 className="card subject-card w-100"
@@ -65,8 +68,7 @@ const SubjectsList = () => {
           ))
         ) : (
           <div className="text-center w-100">
-            <div className="spinner-border text-primary" role="status" />
-            <p>Loading...</p>
+            <p>No subjects available for selection.</p>
           </div>
         )}
       </div>

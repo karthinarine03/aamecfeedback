@@ -35,9 +35,12 @@ const Onestaffreview = () => {
     const sectionRatings = Object.entries(sectionMap).map(([section, facultyMap]) => {
       const facultyRatings = Object.values(facultyMap).map(fac => {
         const avg = fac.ratings.reduce((sum, r) => sum + r.rating, 0) / fac.ratings.length;
+        const avgRating = parseFloat(avg.toFixed(1));
+        const avgPercentage = Math.round((avgRating / 5) * 10);
         return {
           ...fac,
-          avgRating: parseFloat(avg.toFixed(1)),
+          avgRating,
+          avgPercentage,
         };
       });
 
@@ -54,14 +57,14 @@ const Onestaffreview = () => {
   }).filter(subject => subject.sectionRatings.length > 0);
 
   const renderTableBySection = (sectionName) => (
-    <div className="table-responsive shadow rounded mb-4">
-      <h4 className="text-center bg-light py-2 fw-bold">Section {sectionName}</h4>
+    <div className="table-responsive shadow rounded mb-5">
+      <h4 className="text-center bg-light py-3 fw-bold rounded-top">Section {sectionName}</h4>
       <table className="table table-bordered table-hover align-middle mb-0">
-        <thead className="table-dark">
+        <thead className="table-dark text-center">
           <tr>
-            <th>Subject</th>
-            <th>Faculty</th>
-            <th>Average Rating</th>
+            <th className="text-start px-4">Subject</th>
+            <th className="text-start px-4">Faculty</th>
+            <th className="text-center">Average Rating</th>
           </tr>
         </thead>
         <tbody>
@@ -71,9 +74,12 @@ const Onestaffreview = () => {
 
             return sectionData.facultyRatings.map((fac, index) => (
               <tr key={`${subject._id}-${sectionName}-${fac.faculty}-${index}`}>
-                <td>{subject.subject}</td>
-                <td>{fac.faculty}</td>
-                <td><span className="badge bg-success">{fac.avgRating}</span></td>
+                <td className="text-start px-4">{subject.subject}</td>
+                <td className="text-start px-4">{fac.faculty}</td>
+                <td className="text-center">
+                  <span className="badge bg-success fs-6 me-2">{fac.avgPercentage}%</span>
+                  <small>({fac.avgRating})</small>
+                </td>
               </tr>
             ));
           })}
@@ -90,6 +96,7 @@ const Onestaffreview = () => {
         subject: subject.subject,
         faculty: fac.faculty,
         avgRating: fac.avgRating,
+        avgPercentage: fac.avgPercentage,
       }));
     });
 
@@ -104,7 +111,7 @@ const Onestaffreview = () => {
               <p className="mb-1">Subject: <strong>{item.subject}</strong></p>
               <p className="mb-1">Faculty: {item.faculty}</p>
               <p>
-                Avg Rating: <span className="badge bg-success">{item.avgRating}</span>
+                Avg Rating: <span className="badge bg-success">{item.avgRating}</span> ({item.avgPercentage})
               </p>
               <hr />
             </div>
@@ -128,12 +135,9 @@ const Onestaffreview = () => {
           onChange={handleSemesterChange}
         >
           <option value="">-- Select Semester --</option>
-          <option value="3">Semester 3</option>
-          <option value="4">Semester 4</option>
-          <option value="5">Semester 5</option>
-          <option value="6">Semester 6</option>
-          <option value="7">Semester 7</option>
-          <option value="8">Semester 8</option>
+          {[3, 4, 5, 6, 7, 8].map((sem) => (
+            <option key={sem} value={sem}>{`Semester ${sem}`}</option>
+          ))}
         </select>
       </div>
 

@@ -48,6 +48,7 @@ const SubmitReview = () => {
             rating: totalRating,
             comment: comments,
             faculty,
+            semester,
           },
         ],
       },
@@ -55,6 +56,10 @@ const SubmitReview = () => {
 
     addReview(value);
   };
+
+  const totalRating = score.reduce((sum, val) => sum + val, 0);
+  const maxScore = Questions.length * 5;
+  const percentage = ((totalRating / maxScore) * 100).toFixed(2);
 
   return (
     <div className="container py-5">
@@ -93,6 +98,13 @@ const SubmitReview = () => {
         </div>
 
         <div className="text-center mt-4">
+          <h5>
+            Total Score: {totalRating} / {maxScore}
+          </h5>
+          <h5>
+            Percentage: {percentage}%
+          </h5>
+
           <button type="submit" className="btn btn-primary px-5 py-2" disabled={isLoading}>
             {isLoading ? "Submitting..." : "Submit Feedback"}
           </button>

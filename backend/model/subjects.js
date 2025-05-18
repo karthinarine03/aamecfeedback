@@ -3,7 +3,9 @@ import mongoose from "mongoose";
 const Subjects = new mongoose.Schema({
     subject : {
         type : String
-    },
+    },semester: {
+            type: String  
+            },
     ratings : [
         {
             student : {
@@ -19,6 +21,9 @@ const Subjects = new mongoose.Schema({
             },
             faculty:{
                 type:String
+            },
+            semester: {
+            type: String  
             }
         }
     ]

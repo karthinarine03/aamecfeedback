@@ -24,62 +24,74 @@ export const addRating = catchAsynError(async(req,res,next)=>{
 })
 
 export const updatesubjects = catchAsynError(async (req, res, next) => {
+  try {
+    const { subjects } = req.body;
 
-    const {subjects} = req.body
-
-    if(!Array.isArray(req.body.subjects)){
-        return next(new ErrorHandler("SUBJECT IS ONLY IN ARRAY",404))
+    if (!Array.isArray(subjects)) {
+      return next(new ErrorHandler("Subjects must be an array", 400));
     }
 
-    const checkData = await Student.find({_id : req.params.id})
-    
-    const isExist = checkData[0]?.subjects?.some(s=> s.subject == subjects[0].subject)
-    if(isExist){
-        return next(new ErrorHandler("already subject rated",400))
+    if (subjects.length === 0) {
+      return next(new ErrorHandler("Subjects array is empty", 400));
     }
 
-    const data=await Student.findByIdAndUpdate(
-        {_id:req.params.id},
-        {$push:{subjects:{$each:req.body.subjects}}},
-        {new:true,runValidators:true})
-    
-    if(!data){
-        return next (new(ErrorHandler("CANNOT UPDATE",404)))
-    }
-    
-    // add to Subjects collection
-    const {subject,rating,comment,faculty} = subjects[0]
-    const sub = await Subjects.findOne({subject : subject})
-
-    if(sub){
-        sub.ratings.push({
-            student : data._id,
-            rating,
-            comment,faculty
-        })
-
-        await sub.save()
-
-        return res.status(200).json({
-            sub
-        })
-
+    // Get student by ID from URL param
+    const student = await Student.findById({_id:req.params.id});
+    if (!student) {
+      return next(new ErrorHandler("Student not found", 404));
     }
 
-    const subcoll = await Subjects.create({
+    // Extract the first subject rating (you can modify this to support multiple ratings at once)
+    const subToAdd = subjects[0];
+    const { subject, rating, comment, faculty, semester } = subToAdd;
+
+    if (!subject || !semester) {
+      return next(new ErrorHandler("Subject and semester are required", 400));
+    }
+
+    // Check if this subject is already rated by student
+    const isExist = student.subjects.some((s) => s.subject === subject);
+    if (isExist) {
+      return next(new ErrorHandler("Subject already rated", 400));
+    }
+
+    // Add the new subject rating to the student's record
+    student.subjects.push(subToAdd);
+    await student.save();
+
+    // Prepare new rating object including semester
+    const newRating = {
+      student: student._id,
+      rating,
+      comment,
+      faculty,
+      semester, // ✅ include semester inside the rating
+    };
+
+    // Check if subject already exists in the Subjects collection
+    let subDoc = await Subjects.findOne({ subject, semester });
+
+    if (subDoc) {
+      subDoc.ratings.push(newRating);
+      await subDoc.save();
+    } else {
+      // Create new subject document with initial rating
+      subDoc = await Subjects.create({
         subject,
-        ratings : [{
-            student : data._id,
-            rating,
-            comment,faculty
-        }]
-    })
+        semester,
+        ratings: [newRating],
+      });
+    }
 
-    res.json({
-        data,
-        subcoll,
-        sub
-    })
+    res.status(200).json({
+      student,
+      subjectCollection: subDoc,
+    });
+
+  } catch (error) {
+    console.error("Error in updatesubjects:", error);
+    return next(new ErrorHandler("Internal Server Error", 500));
+  }
 });
 
 export const getStudent=catchAsynError(async(req,res,next)=>{
