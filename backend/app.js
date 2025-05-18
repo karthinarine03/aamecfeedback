@@ -15,7 +15,8 @@ const app = express();
 
 // 2. Connect to MongoDB once, using process.env.MONGO_URI
 connectDatabase();
-
+console.log('PORT:', process.env.PORT);
+console.log('MONGO_URI:', process.env.MONGO_URI);
 // 3. Middlewares
 app.use(express.json());
 app.use(cors());
@@ -29,7 +30,7 @@ app.use('/api/v1', staffRouter);
 app.use(errorMiddleware);
 
 // 6. Start server with a default port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on sucess`);
 });
