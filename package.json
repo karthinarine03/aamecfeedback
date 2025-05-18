@@ -17,13 +17,17 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-"start:backend":  "cd backend && npm start",
+    "start:backend": "cd backend && npm start",
     "start:frontend": "cd frontend && npm run dev",
-    "start":          "concurrently \"npm run start:backend\" \"npm run start:frontend\""
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^9.1.2"
-  }
+   
+  },
+  "dependencies": {
+  "concurrently": "^7.6.0"
+}
+
 }
