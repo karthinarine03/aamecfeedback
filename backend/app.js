@@ -1,27 +1,36 @@
-import express from 'express'
-import dotenv from 'dotenv'
-import errorMiddleware from "./middleware/errorMiddleware.js"
-import courserouter from  './routers/courserouter.js'
-import studentRouter from './routers/studentRouter.js'
-import connectDatabase from './config/dbConnect.js'
-import staffRouter from './routers/staffRouter.js'
-import cors from 'cors'
-const app = express()
-connectDatabase()
-dotenv.config({path : 'backend/config/config.env'})
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+
+import connectDatabase from './config/dbConnect.js';
+import courserouter from './routers/courserouter.js';
+import studentRouter from './routers/studentRouter.js';
+import staffRouter from './routers/staffRouter.js';
+import errorMiddleware from './middleware/errorMiddleware.js';
+
+// 1. Load env variables before anything else
+dotenv.config({ path: './config/config.env' });
+
+const app = express();
+
+// 2. Connect to MongoDB once, using process.env.MONGO_URI
+connectDatabase();
+console.log('PORT:', process.env.PORT);
+console.log('MONGO_URI:', process.env.MONGO_URI);
+// 3. Middlewares
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
-//connect db
-connectDatabase()
+// 4. Routes
+app.use('/api/v1', courserouter);
+app.use('/api/v1', studentRouter);
+app.use('/api/v1', staffRouter);
 
-app.use('/api/v1/',courserouter);
-app.use('/api/v1/',studentRouter)
-app.use('/api/v1/',staffRouter)
+// 5. Error handling
+app.use(errorMiddleware);
 
-//middleware 
-app.use(errorMiddleware)
-const port = process.env.PORT
-app.listen(port,()=>{
-    console.log(`It's running on the ${port} port`);
-})
+// 6. Start server with a default port
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on sucess`);
+});

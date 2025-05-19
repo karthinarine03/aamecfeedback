@@ -36,6 +36,26 @@ const SubjectsList = () => {
     }
   };
 
+  const handleCardClick = (subject) => {
+    const subjectTitle = subject.subjectTitle;
+    const alreadyReviewed = selectedSubjectTitles.includes(subjectTitle);
+    console.log("Clicked subject:", subjectTitle, "Already reviewed:", alreadyReviewed);
+
+    if (alreadyReviewed) {
+      handleAlreadyReviewedClick(subjectTitle);
+    } else {
+      const faculty = encodeURIComponent(subject.faculty);
+      const title = encodeURIComponent(subjectTitle);
+      const encodedSem = encodeURIComponent(semester);
+      const encodedSec = encodeURIComponent(section);
+
+      navigate(
+        `/submitReview/${id}?sub=${title}&sem=${encodedSem}&sec=${encodedSec}&faculty=${faculty}`,
+        { replace: true }
+      );
+    }
+  };
+
   return (
     <div className="container py-5">
       <h1 className="text-center text-gradient mb-5">Subjects</h1>
@@ -55,26 +75,9 @@ const SubjectsList = () => {
             return (
               <div className="col-12 col-sm-6 col-lg-4 d-flex" key={index}>
                 <div
-                  className={`card subject-card w-100 ${
-                    alreadyReviewed ? "disabled-card" : ""
-                  }`}
-                  style={{
-                    cursor: "pointer",
-                    opacity: alreadyReviewed ? 0.9 : 1,
-                  }}
-                  onClick={() => {
-                    if (alreadyReviewed) {
-                      handleAlreadyReviewedClick(subjectTitle);
-                    } else {
-                      navigate(
-                        `/submitReview/${id}?sub=${encodeURIComponent(
-                          subject.subjectTitle
-                        )}&sem=${semester}&sec=${section}&faculty=${encodeURIComponent(
-                          subject.faculty
-                        )}`
-                      );
-                    }
-                  }}
+                  className={`card subject-card w-100 ${alreadyReviewed ? "disabled-card" : ""}`}
+                  style={{ cursor: "pointer", opacity: alreadyReviewed ? 0.9 : 1 }}
+                  onClick={() => handleCardClick(subject)}
                 >
                   <div className="card-body text-center d-flex flex-column justify-content-center">
                     <h5 className="card-title fw-bold">
@@ -82,11 +85,9 @@ const SubjectsList = () => {
                     </h5>
                     <p className="mb-0">{subject.faculty}</p>
                     {alreadyReviewed && (
-                      <span
-                        className={`tick-animate ${isAnimating ? "tick-bounce" : ""}`}
-                      >
+                      <span className={`tick-animate ${isAnimating ? "tick-bounce" : ""}`}>
                         <i className="bi bi-check-circle-fill tick-icon"></i>
-                        Reviewed
+                        Already Reviewed
                       </span>
                     )}
                   </div>
@@ -105,3 +106,4 @@ const SubjectsList = () => {
 };
 
 export default SubjectsList;
+

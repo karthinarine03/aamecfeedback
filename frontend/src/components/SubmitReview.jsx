@@ -1,108 +1,111 @@
-// SubjectsList.jsx
 import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams, useNavigate } from "react-router-dom";
-import { useGetSubjectsMutation } from "../redux/api/courseApi";
-import { useGetStudentsQuery } from "../redux/api/studentApi";
-import "../SubjectsList.css";
+import { useAddSubjectReviewMutation } from "../redux/api/studentApi";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { Questions } from "./helper/Question";
+import { Rate } from "antd";
+import "antd/dist/reset.css";
+import "../SubmitReview.css";
 
-const SubjectsList = () => {
-  const [searchParams] = useSearchParams();
+const SubmitReview = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const params = useParams();
 
+  const tips = ['VERY POOR', 'BAD', 'NORMAL', 'GOOD', 'EXCELLENT'];
+  const [score, setScore] = useState(new Array(Questions.length).fill(0));
+  const [comments, setComments] = useState('');
+
+  const subject = searchParams.get("sub");
   const semester = searchParams.get("sem");
   const section = searchParams.get("sec");
+  const faculty = searchParams.get("faculty");
   const id = params.id;
 
-  const { data: studentData, isLoading: studentLoading } = useGetStudentsQuery(id);
-  const [getSubjects, { data: subjectData, isLoading: subjectLoading }] = useGetSubjectsMutation();
-
-  const [animatingSubjects, setAnimatingSubjects] = useState([]);
+  const [addReview, { error, isLoading, isSuccess }] = useAddSubjectReviewMutation();
 
   useEffect(() => {
-    if (semester && section) {
-      getSubjects({ semester, section });
+    if (isSuccess) {
+      toast.success("Successfully submitted");
+      navigate(`/`);
     }
-  }, [semester, section, getSubjects]);
+  }, [isSuccess, navigate]);
 
-  const selectedSubjectTitles = studentData?.data?.subjects?.map((s) => s?.subject) || [];
-  const allSubjects = subjectData?.filtered?.[0]?.subjects || [];
-
-  const handleAlreadyReviewedClick = (subjectTitle) => {
-    if (!animatingSubjects.includes(subjectTitle)) {
-      setAnimatingSubjects((prev) => [...prev, subjectTitle]);
-      setTimeout(() => {
-        setAnimatingSubjects((prev) => prev.filter((title) => title !== subjectTitle));
-      }, 800); // animation duration
+  const score_submit = (e) => {
+    e.preventDefault();
+    if (score.includes(0)) {
+      toast.error("Please rate all questions");
+      return;
     }
+
+    const totalRating = score.reduce((sum, val) => sum + val, 0);
+    const value = {
+      id,
+      body: {
+        subjects: [
+          {
+            subject,
+            rating: totalRating,
+            comment: comments,
+            faculty,semester
+          },
+        ],
+      },
+    };
+
+    addReview(value);
   };
 
   return (
     <div className="container py-5">
-      <h1 className="text-center text-gradient mb-5">Subjects</h1>
-
-      <div className="row g-4">
-        {studentLoading || subjectLoading ? (
-          <div className="text-center w-100">
-            <div className="spinner-border text-primary" role="status" />
-            <p>Loading...</p>
-          </div>
-        ) : allSubjects.length > 0 ? (
-          allSubjects.map((subject, index) => {
-            const subjectTitle = subject.subjectTitle;
-            const alreadyReviewed = selectedSubjectTitles.includes(subjectTitle);
-            const isAnimating = animatingSubjects.includes(subjectTitle);
-
-            return (
-              <div className="col-12 col-sm-6 col-lg-4 d-flex" key={index}>
-                <div
-                  className={`card subject-card w-100 ${
-                    alreadyReviewed ? "disabled-card" : ""
-                  }`}
-                  style={{
-                    cursor: "pointer",
-                    opacity: alreadyReviewed ? 0.9 : 1,
+      <h1 className="text-center mb-5 text-gradient">Feedback: {subject}</h1>
+      <form onSubmit={score_submit}>
+        <div className="row g-4">
+          {Questions.map((question, index) => (
+            <div className="col-md-6" key={index}>
+              <div className="card p-3 shadow-sm h-100 question-card">
+                <h5 className="mb-3">{index + 1}. {question.ques}</h5>
+                <Rate
+                  tooltips={tips}
+                  className="ratingstar"
+                  allowClear={false}
+                  allowHalf
+                  onChange={(count) => {
+                    const updatedScores = [...score];
+                    updatedScores[index] = parseFloat(count);
+                    setScore(updatedScores);
                   }}
-                  onClick={() => {
-                    if (alreadyReviewed) {
-                      handleAlreadyReviewedClick(subjectTitle);
-                    } else {
-                      navigate(
-                        `/submitReview/${id}?sub=${encodeURIComponent(
-                          subject.subjectTitle
-                        )}&sem=${semester}&sec=${section}&faculty=${encodeURIComponent(
-                          subject.faculty
-                        )}`
-                      );
-                    }
-                  }}
-                >
-                  <div className="card-body text-center d-flex flex-column justify-content-center">
-                    <h5 className="card-title fw-bold">
-                      {subject.subjectCode} - {subject.subjectTitle}
-                    </h5>
-                    <p className="mb-0">{subject.faculty}</p>
-                    {alreadyReviewed && (
-                      <span
-                        className={`tick-animate ${isAnimating ? "tick-bounce" : ""}`}
-                      >
-                        <i className="bi bi-check-circle-fill tick-icon"></i>
-                        Reviewed
-                      </span>
-                    )}
-                  </div>
-                </div>
+                />
               </div>
-            );
-          })
-        ) : (
-          <div className="text-center w-100">
-            <p>No subjects available for selection.</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-5">
+          <h4 className="mb-3">Additional Comments</h4>
+          <textarea
+            className="form-control shadow-sm"
+            rows="4"
+            placeholder="Write your comments here..."
+            value={comments}
+            onChange={(e) => setComments(e.target.value)}
+          />
+        </div>
+
+        <div className="text-center mt-4">
+          <button type="submit" className="btn btn-primary px-5 py-2" disabled={isLoading}>
+            {isLoading ? "Submitting..." : "Submit Feedback"}
+          </button>
+        </div>
+
+        {error && (
+          <div className="alert alert-danger text-center mt-3" role="alert">
+            Error: {error.message || "Submission failed"}
           </div>
         )}
-      </div>
+      </form>
     </div>
   );
 };
 
-export default SubjectsList;
+export default SubmitReview;
