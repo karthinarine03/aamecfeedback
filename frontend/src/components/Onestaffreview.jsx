@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { DownloadTableExcel } from 'react-export-table-to-excel';
 import { useGetAllSubjectsReviewQuery } from '../redux/api/staffApi';
 
 const Onestaffreview = () => {
+  const tableRef = useRef(null)
   const { data, error, isLoading } = useGetAllSubjectsReviewQuery();
   const [selectedSemester, setSelectedSemester] = useState('');
 
@@ -58,8 +60,18 @@ const Onestaffreview = () => {
 
   const renderTableBySection = (sectionName) => (
     <div className="table-responsive shadow rounded mb-5">
-      <h4 className="text-center bg-light py-3 fw-bold rounded-top">Section {sectionName}</h4>
-      <table className="table table-bordered table-hover align-middle mb-0">
+
+      <DownloadTableExcel
+          filename="staff table"
+          sheet="staff"
+          currentTableRef={tableRef.current}
+      >
+
+          <button> Export excel </button>
+
+      </DownloadTableExcel>
+      <h4 className="text-center bg-light py-3 fw-bold rounded-top" >Section {sectionName}</h4>
+      <table ref={tableRef} className="table table-bordered table-hover align-middle mb-0" >
         <thead className="table-dark text-center">
           <tr>
             <th className="text-start px-4">Subject</th>
