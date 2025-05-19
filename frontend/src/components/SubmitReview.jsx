@@ -6,6 +6,7 @@ import { Questions } from "./helper/Question";
 import { Rate } from "antd";
 import "antd/dist/reset.css";
 import "../SubmitReview.css";
+import { useGetFacultyDeptMutation } from "../redux/api/courseApi";
 
 const SubmitReview = () => {
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ const SubmitReview = () => {
   const id = params.id;
 
   const [addReview, { error, isLoading, isSuccess }] = useAddSubjectReviewMutation();
+  const [getFacultyDept,{data:facultyData,error:facultError,isLoading : facultyLoading}] = useGetFacultyDeptMutation()
+  
 
   useEffect(() => {
     if (isSuccess) {
@@ -31,6 +34,15 @@ const SubmitReview = () => {
     }
   }, [isSuccess, navigate]);
 
+  useEffect(()=>{
+    const value = {
+      faculty
+    }
+
+    getFacultyDept(value)
+  },[faculty])
+  const {department} = facultyData ? facultyData : ""
+  console.log(facultError,facultyLoading,department);
   const score_submit = (e) => {
     e.preventDefault();
     if (score.includes(0)) {
@@ -47,7 +59,8 @@ const SubmitReview = () => {
             subject,
             rating: totalRating,
             comment: comments,
-            faculty,semester
+            faculty,department,
+            semester
           },
         ],
       },

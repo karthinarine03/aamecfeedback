@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import catchAsynError from "../middleware/catchAsynError.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,3 +25,23 @@ export const coursecontroller = async(req, res) => {
     filtered
   });
 };
+
+export const staffDept = catchAsynError(async(req,res,next)=>{
+  const {faculty} = req.body;
+
+  const filterdData = 
+  await data.forEach(semester => {
+    semester.sections.forEach(section => {
+      section.subjects.forEach(subject => {
+        if (subject.faculty.toLowerCase().includes(faculty.toLowerCase())) {
+          res.status(200).json({
+            department : subject.department
+          })
+        }
+      });
+    });
+  });
+  res.status(200).json({
+    filterdData
+  })
+})

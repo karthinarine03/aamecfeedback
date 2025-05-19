@@ -1,12 +1,15 @@
 import React, { useRef, useState } from 'react';
 import { DownloadTableExcel } from 'react-export-table-to-excel';
 import { useGetAllSubjectsReviewQuery } from '../redux/api/staffApi';
+import { useGetFacultyDeptMutation } from '../redux/api/courseApi';
 
 const Onestaffreview = () => {
   const tableRef = useRef(null)
   const { data, error, isLoading } = useGetAllSubjectsReviewQuery();
+  const [getFacultyDept,{data:facultyData,error:facultError}] = useGetFacultyDeptMutation()
   const [selectedSemester, setSelectedSemester] = useState('');
 
+  console.log(data);
   const handleSemesterChange = (e) => {
     setSelectedSemester(e.target.value);
   };
@@ -15,6 +18,15 @@ const Onestaffreview = () => {
   if (error) return <p className="text-center text-danger my-4">Error loading reviews.</p>;
   if (!data || !data.data) return <p className="text-center text-muted my-4">No data available.</p>;
 
+  const getDept =(faculty) =>{
+    // e.preventDefault()
+    const value = {
+      faculty
+    }
+    getFacultyDept(value)
+  }
+
+  console.log(facultError);
   const filteredSubjects = data.data.map(subject => {
     const sectionMap = {};
 
@@ -71,11 +83,12 @@ const Onestaffreview = () => {
 
       </DownloadTableExcel>
       <h4 className="text-center bg-light py-3 fw-bold rounded-top" >Section {sectionName}</h4>
-      <table ref={tableRef} className="table table-bordered table-hover align-middle mb-0" >
+      <table  className="table table-bordered table-hover align-middle mb-0" >
         <thead className="table-dark text-center">
           <tr>
             <th className="text-start px-4">Subject</th>
             <th className="text-start px-4">Faculty</th>
+            <th className="text-start px-4">Department</th>
             <th className="text-center">Average Rating</th>
           </tr>
         </thead>
@@ -88,6 +101,7 @@ const Onestaffreview = () => {
               <tr key={`${subject._id}-${sectionName}-${fac.faculty}-${index}`}>
                 <td className="text-start px-4">{subject.subject}</td>
                 <td className="text-start px-4">{fac.faculty}</td>
+                <td className="text-start px-4">{}</td>
                 <td className="text-center">
                   <span className="badge bg-success fs-6 me-2">{fac.avgPercentage}%</span>
                   <i className="bi bi-star-fill me-1 text-warning"></i>
@@ -98,6 +112,30 @@ const Onestaffreview = () => {
           })}
         </tbody>
       </table>
+      {/* table for excel */}
+      <table ref={tableRef} style={{ display: 'none' }}>
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Faculty</th>
+            <th>Avg Percentage</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredSubjects.map(subject =>
+            subject.sectionRatings.map(section =>
+              section.facultyRatings.map(fac => (
+                <tr key={`export-${subject._id}-${section.section}-${fac.faculty}`}>
+                  <td>{subject.subject}</td>
+                  <td>{fac.faculty}</td>
+                  <td>{fac.avgPercentage}%</td>
+                </tr>
+              ))
+            )
+          )}
+        </tbody>
+        </table>
+
     </div>
   );
 

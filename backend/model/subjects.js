@@ -22,6 +22,9 @@ const Subjects = new mongoose.Schema({
             faculty:{
                 type:String
             },
+            department :{
+                type : String
+            },
             semester: {
             type: String  
             }

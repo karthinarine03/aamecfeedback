@@ -14,7 +14,16 @@ export const courseApi = createApi({
                 }
             }
         }),
+        getFacultyDept : builder.mutation({
+            query(body){
+                return {
+                    url :"/facultyDept",
+                    method : "POST",
+                    body
+                }
+            }
+        }),
     })
 })
 
-export const {useGetSubjectsMutation} = courseApi
+export const {useGetSubjectsMutation,useGetFacultyDeptMutation} = courseApi
