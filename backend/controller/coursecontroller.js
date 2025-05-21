@@ -20,7 +20,7 @@ export const coursecontroller = async(req, res) => {
       entry.sections.filter(sec => sec.section == section)
     );
 
-  res.json({
+  res.status(200).json({
     filtered
   });
 };
